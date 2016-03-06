@@ -8,13 +8,20 @@
     tools:context="com.example.keshav.represent.MainActivity"
     tools:deviceIds="wear">
 
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/pager_container"/>
+
+
     <TextView
         android:id="@+id/rep_party"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Barbara Boxer
-        Democrat"
+        android:text="  "
         app:layout_box="all"
+        android:layout_below="@id/pager_container"
         android:layout_marginStart="75dp"
         android:layout_marginTop="47dp"
         android:layout_alignParentTop="true"

@@ -27,7 +27,6 @@ public class DetailActivity extends AppCompatActivity{
     private TextView committeest;
     private TextView billst;
 
-
     int img_resource = R.drawable.barbara;
     String name = "Senator Barbara Boxer";
     String party ="DEMOCRAT";
@@ -53,10 +52,6 @@ public class DetailActivity extends AppCompatActivity{
         billst = (TextView)findViewById(R.id.rep_bills);
         billst.setText(bills);
 
-
-
-
-
         button3=(Button) findViewById(R.id.button3);
         button3.setOnClickListener(new View.OnClickListener() {
 
@@ -68,8 +63,5 @@ public class DetailActivity extends AppCompatActivity{
 
 
         });
-
     }
-
-
 }

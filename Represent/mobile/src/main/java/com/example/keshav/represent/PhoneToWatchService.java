@@ -46,16 +46,18 @@ public class PhoneToWatchService extends Service {
         // Which cat do we want to feed? Grab this info from INTENT
         // which was passed over when we called startService
         Bundle extras = intent.getExtras();
-        final String catName = extras.getString("CAT_NAME");
+        final String zipCode = extras.getString("ZIP_CODE");
 
         // Send the message with the cat name
         new Thread(new Runnable() {
             @Override
             public void run() {
                 //first, connect to the apiclient
+
                 mApiClient.connect();
+                Log.d("represent", "connected api client");
                 //now that you're connected, send a massage with the cat name
-                sendMessage("/" + catName, catName);
+                sendMessage("/" + zipCode, zipCode);
             }
         }).start();
 
@@ -70,11 +72,13 @@ public class PhoneToWatchService extends Service {
     private void sendMessage( final String path, final String text ) {
         //one way to send message: start a new thread and call .await()
         //see watchtophoneservice for another way to send a message
+        Log.d("represent", "about to send message");
         new Thread( new Runnable() {
             @Override
             public void run() {
                 NodeApi.GetConnectedNodesResult nodes = Wearable.NodeApi.getConnectedNodes( mApiClient ).await();
                 for(Node node : nodes.getNodes()) {
+                    Log.d("represent", "node found" + node.toString());
                     //we find 'nodes', which are nearby bluetooth devices (aka emulators)
                     //send a message for each of these nodes (just one, for an emulator)
                     MessageApi.SendMessageResult result = Wearable.MessageApi.sendMessage(

@@ -5,6 +5,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Menu;
@@ -21,7 +22,7 @@ import android.os.Bundle;
 
 public class MainActivity extends AppCompatActivity {
     private EditText edit_txt;
-
+    public String zipCodeEntry;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -34,15 +35,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_DONE || ((event.getKeyCode() == KeyEvent.KEYCODE_ENTER))) {
-                    int zip = Integer.parseInt(edit_txt.getText().toString());
-                    Intent myintent = new Intent(MainActivity.this, Reps.class);
-                    myintent.putExtra("zip",zip);
-                    startActivity(myintent);
-
-                    Intent wIntent = new Intent(getBaseContext(), PhoneToWatchService.class);
+                    zipCodeEntry = edit_txt.getText().toString();
+                    Intent wIntent = new Intent(getBaseContext(), PhoneToWatchService.class); //watch
+                    wIntent.putExtra("ZIP_CODE", zipCodeEntry);
+                    //Log.d("represent", "here");
                     startService(wIntent);
 
-
+                    Intent myintent = new Intent(MainActivity.this, Reps.class); //phone
+                    startActivity(myintent);
                     return true;
                 }
                 return false;
@@ -53,16 +53,16 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                Integer location=94101;
-                Intent myintent = new Intent(getApplicationContext(), Reps.class);
-                myintent.putExtra("location",location);
+                String fakeZip = "94101";
+                Intent wIntent = new Intent(getBaseContext(), PhoneToWatchService.class); //watch
+                wIntent.putExtra("ZIP_CODE", fakeZip);
+//                Log.d("represent", "here");
+                startService(wIntent);
+
+                Intent myintent = new Intent(MainActivity.this, Reps.class); //phone
                 startActivity(myintent);
-
             }
-
-
         });
-
     }
 
     @Override
