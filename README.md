@@ -9,7 +9,7 @@ Keshav Thvar ([kthvar@berkeley.edu](mailto:kthvar@berkeley.edu))
 
 ## Demo Video
 
-See [Represent!] (https://vimeo.com/157887983)
+See [Represent!] (https://vimeo.com/158861651)
 
 ## Screenshots
 
@@ -22,5 +22,5 @@ See [Represent!] (https://vimeo.com/157887983)
 
 ## Acknowledgments
 
-Used StackOverflow immensely as well as http://jasonmcreynolds.com/?p=388 to implement the shuffle/shake view.
+Used StackOverflow immensely as well as http://jasonmcreynolds.com/?p=388 to implement the shuffle/shake view. Used Twitter and Sunlight tutorials
 
