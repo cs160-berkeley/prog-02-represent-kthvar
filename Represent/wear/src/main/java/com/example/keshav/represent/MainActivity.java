@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.wearable.activity.WearableActivity;
 import android.support.wearable.view.BoxInsetLayout;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewStub;
 import android.widget.FrameLayout;
@@ -22,6 +23,10 @@ public class MainActivity extends WearableActivity {
 //
     public TextView candidate;
     public String zipCodeEntry;
+    public String nameEntry;
+    public String partyEntry;
+    public String[] names;
+    public String[] parties;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,13 +35,23 @@ public class MainActivity extends WearableActivity {
         setAmbientEnabled();
         Intent wintent = getIntent();
         Bundle extras = wintent.getExtras();
+        Log.d("extras", String.valueOf(extras));
         if (extras != null) {
-            zipCodeEntry = extras.getString("ZIP_CODE");
+            zipCodeEntry = extras.getString("zipcode");
+            nameEntry=extras.getString("name");
+            partyEntry=extras.getString("party");
+
         }
+        Log.d("names",nameEntry);
+        names=nameEntry.split("^");
+        Log.d("name",names[0]);
+        parties=partyEntry.split("^");
         ViewPager candidatePager = new ViewPager(this);
         candidatePager.setId(R.id.pager_id);
         CandidatePagerAdapter pagerAdapter = new CandidatePagerAdapter(getFragmentManager());
         pagerAdapter.setZipCode(zipCodeEntry);
+        pagerAdapter.setNames(names);
+        pagerAdapter.setParties(parties);
         candidatePager.setAdapter(pagerAdapter);
 
         FrameLayout pagerContainer = (FrameLayout) findViewById(R.id.pager_container);

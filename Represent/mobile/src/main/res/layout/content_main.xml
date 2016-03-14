@@ -29,7 +29,8 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:background="#eb5757"
-        android:layout_marginBottom="101dp" />
+        android:layout_marginBottom="101dp"
+        android:onClick="onConnected"/>
 
     <EditText
         android:layout_width="wrap_content"

@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Created by Keshav on 3/1/16.
  */
 public class RepCand implements Serializable {
-    private int rep_resource;
+    private String rep_resource;
     private int rep_twot;
     private String rep_name;
     private String rep_party;
@@ -17,7 +17,7 @@ public class RepCand implements Serializable {
     private String rep_committees;
     private String rep_bills;
 
-    public RepCand(int rep_resource, int rep_twot, String rep_name, String rep_party, String rep_email, String rep_web, String rep_tweet,
+    public RepCand(String rep_resource, int rep_twot, String rep_name, String rep_party, String rep_email, String rep_web, String rep_tweet,
                    String rep_termend, String rep_committees, String rep_bills){
         super();
         this.setRep_resource(rep_resource);
@@ -32,12 +32,12 @@ public class RepCand implements Serializable {
         this.setRep_bills(rep_bills);
     }
 
-    public int getRep_resource() {
+    public String getRep_resource() {
         return rep_resource;
     }
 
-    public void setRep_resource(int rep_resource) {
-        this.rep_resource = rep_resource;
+    public void setRep_resource(String twitterid) {
+        this.rep_resource = twitterid;
     }
 
     public String getRep_name() {

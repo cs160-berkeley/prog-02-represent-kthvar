@@ -12,6 +12,8 @@ import com.google.android.gms.wearable.Node;
 import com.google.android.gms.wearable.NodeApi;
 import com.google.android.gms.wearable.Wearable;
 
+import java.util.ArrayList;
+
 
 public class PhoneToWatchService extends Service {
 
@@ -45,9 +47,27 @@ public class PhoneToWatchService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         // Which cat do we want to feed? Grab this info from INTENT
         // which was passed over when we called startService
+        if(intent==null){
+            return START_STICKY;
+        }
         Bundle extras = intent.getExtras();
         final String zipCode = extras.getString("ZIP_CODE");
+        Log.d("nullcheck","zip: " + zipCode);
+        ArrayList<String> names=extras.getStringArrayList("names");
+        Log.d("nullcheck","name: " + names.get(0));
+        ArrayList<String> party=extras.getStringArrayList("party");
+        Log.d("nullcheck", "party: " + party.get(0));
 
+        String nameres="";
+        for (String Name:names){
+            nameres=nameres+Name+'^';
+        }
+        final String nameresult=nameres;
+        String partyres="";
+        for (String Party:party){
+            partyres=partyres+Party+'^';
+        }
+        final String partyresult=partyres;
         // Send the message with the cat name
         new Thread(new Runnable() {
             @Override
@@ -57,7 +77,9 @@ public class PhoneToWatchService extends Service {
                 mApiClient.connect();
                 Log.d("represent", "connected api client");
                 //now that you're connected, send a massage with the cat name
-                sendMessage("/" + zipCode, zipCode);
+                sendMessage("/zipCode", zipCode);
+                sendMessage("/nameresult", nameresult);
+                sendMessage("/partyresult", partyresult);;
             }
         }).start();
 

@@ -4,6 +4,12 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonArray;
+import com.koushikdutta.ion.Ion;
+import com.koushikdutta.ion.Response;
+import com.koushikdutta.async.future.FutureCallback;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -17,7 +23,7 @@ import java.util.List;
  * Created by Keshav on 3/1/16.
  */
 public class RepAdapter extends ArrayAdapter {
-    private List list=new ArrayList();
+    private List<RepCand> list=new ArrayList<RepCand>();
 
     public RepAdapter(Context context, int resource) {
         super(context, resource);
@@ -25,6 +31,19 @@ public class RepAdapter extends ArrayAdapter {
     public void add(RepCand object){
         list.add(object);
         super.add(object);
+    }
+
+    public void setBills(int i, String bills) {
+        list.get(i).setRep_bills(bills);
+        notifyDataSetChanged();
+    }
+    public void setCommittees(int i, String committees) {
+        list.get(i).setRep_committees(committees);
+        notifyDataSetChanged();
+    }
+    public void setTweet(int i, String tweet) {
+        list.get(i).setRep_tweet(tweet);
+        notifyDataSetChanged();
     }
     static class ImgHolder{
         ImageView img;
@@ -73,7 +92,7 @@ public class RepAdapter extends ArrayAdapter {
 
         }
         RepCand rc=(RepCand) getItem(position);
-        holder.img.setImageResource(rc.getRep_resource());
+        Ion.with(holder.img).load(rc.getRep_resource());
         holder.name.setText(rc.getRep_name());
         holder.party.setText(rc.getRep_party());
         holder.email.setText(rc.getRep_email());

@@ -15,12 +15,11 @@ import com.google.android.gms.wearable.Wearable;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- */
 public class WatchToPhoneService extends Service implements GoogleApiClient.ConnectionCallbacks {
 
     private GoogleApiClient mWatchApiClient;
     private List<Node> nodes = new ArrayList<>();
+    final Service _this = this;
 
     @Override
     public void onCreate() {
@@ -58,6 +57,7 @@ public class WatchToPhoneService extends Service implements GoogleApiClient.Conn
                         //when we find a connected node, we populate the list declared above
                         //finally, we can send a message
                         sendMessage("/send_toast", "Good job!");
+                        _this.stopSelf();
                         Log.d("T", "sent");
                     }
                 });

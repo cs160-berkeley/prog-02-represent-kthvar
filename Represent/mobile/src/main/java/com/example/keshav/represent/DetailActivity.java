@@ -11,6 +11,8 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.koushikdutta.ion.Ion;
+
 import org.w3c.dom.Text;
 
 import java.io.Serializable;
@@ -38,19 +40,21 @@ public class DetailActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detail);
+        Intent intent=getIntent();
+        RepCand current=(RepCand) intent.getSerializableExtra("congman");
 
         piccand=(ImageView) findViewById(R.id.rep_img);
-        piccand.setImageResource(img_resource);
+        Ion.with(piccand).load(current.getRep_resource());
         namet = (TextView) findViewById(R.id.rep_name);
-        namet.setText(name);
+        namet.setText(current.getRep_name());
         partyt = (TextView)findViewById(R.id.rep_party);
-        partyt.setText(party);
+        partyt.setText(current.getRep_party());
         termendt = (TextView)findViewById(R.id.rep_termend);
-        termendt.setText(termend);
+        termendt.setText("Termend:"+current.getRep_termend());
         committeest = (TextView)findViewById(R.id.rep_committees);
-        committeest.setText(committees);
+        committeest.setText(current.getRep_committees());
         billst = (TextView)findViewById(R.id.rep_bills);
-        billst.setText(bills);
+        billst.setText(current.getRep_bills());
 
         button3=(Button) findViewById(R.id.button3);
         button3.setOnClickListener(new View.OnClickListener() {
